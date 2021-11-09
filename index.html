@@ -1,96 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculadora con JavaScript</title>
+<link type="text/css" href="estilo.css" rel="stylesheet">
+</head>
+<body onload="init();">
+<table class="calculadora">
+<tr>
+  <td colspan="4"><span id="resultado"></span></td>
+</tr>
+<tr>
+  <td><button id="siete">7</button></td><td><button id="ocho">8</button></td><td><button id="nueve">9</button></td><td><button id="division">/</button></td>
+</tr>
+<tr>
+  <td><button id="cuatro">4</button></td><td><button id="cinco">5</button></td><td><button id="seis">6</button></td><td><button id="multiplicacion">*</button></td>
+</tr>
+<tr>
+  <td><button id="uno">1</button></td><td><button id="dos">2</button></td><td><button id="tres">3</button></td><td><button id="resta">-</button></td>
+</tr>
+<tr>
+  <td><button id="igual">=</button></td><td><button id="reset">C</button></td><td><button id="cero">0</button></td><td><button id="suma">+</button></td>
+</tr>
+<tr>
+  <td colspan="4"><span id="creditos">Hecho para DenisseEstrada.com</span></td>
+</tr>
+</table>
+<script src="funcionalidad.js"></script>
+</body>
+</html>
+<!--codigo html-->
+.calculadora{
+  display:block;
+  margin:0 auto;
+  padding:20px;
+  background-color:#2980b9;
+  width:300px;
+  height:500px;
+  border-radius: 25px;
+}
+.calculadora td button{
+  display:block;
+  width:70px;
+  height: 70px;
+  font-size: 25px;
+}
+#creditos{
+  display:block;
+  padding-top:20px;
+  color:#fff;
+  text-align: center;
+  width:300px;
+}
+#resultado{
+  display:block;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 50px;
+  width:300px;
+  height: 100px;
+  line-height: 100px;
+  background-color:#fff;
+  border-radius: 25px;
+  overflow-y: scroll;
+}
+<!--codigo css-->
+//Declaramos variables
+var operandoa;
+var operandob;
+var operacion;
 
-<!--comienzo del html-->
-<div class="calculadora"
-<form action="#" name="calculadora" id="calculadora">
-<p id="textoPantalla">0</p>
-<p>
-<input type="button" class="largo" value="Retr" />
-<input type="button" class="largo" value="CE" />
-<input type="button" class="largo" value="C" />
-</p>
-<p>
-<input type="button" value="7" />
-<input type="button" value="8" />
-<input type="button" value="9" />
-<input type="button" value="/"  />
-<input type="button" value="Raiz" />
-</p>
-<p>
-<input type="button" value="4" />
-<input type="button" value="5" />
-<input type="button" value="6" />
-<input type="button" value="*" />
-<input type="button" value="%" />
-</p>
-<p>
-<input type="button" value="1" />
-<input type="button" value="2" />
-<input type="button" value="3" />
-<input type="button" value="-" />
-<input type="button" value="1/x" />
-</p>
-<p>
-<input type="button" value="0" />
-<input type="button" value="+/-" />
-<input type="button" value="." />
-<input type="button" value="+" />
-<input type="button" value="="/>
-</p>
-</form>
-</div>
+function init(){
+  //variables
+  var resultado = document.getElementById('resultado');
+  var reset = document.getElementById('reset');
+  var suma = document.getElementById('suma');
+  var resta = document.getElementById('resta');
+  var multiplicacion = document.getElementById('multiplicacion');
+  var division = document.getElementById('division');
+  var igual = document.getElementById('igual');
+  var uno = document.getElementById('uno');
+  var dos = document.getElementById('dos');
+  var tres = document.getElementById('tres');
+  var cuatro = document.getElementById('cuatro');
+  var cinco = document.getElementById('cinco');
+  var seis = document.getElementById('seis');
+  var siete = document.getElementById('siete');
+  var ocho = document.getElementById('ocho');
+  var nueve = document.getElementById('nueve');
+  var cero = document.getElementById('cero');
+}
 
-<!--comienzo javascripy-->
 
-/*aspectos generales: bordes y color de fondo de calculadora*/
-.calculadora { border: 3px blue ridge; width: 250px;text-align: center;
-               background-color: #f6f8d8; }
+//Eventos de click
+  uno.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "1";
+  }
+  dos.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "2";
+  }
+  tres.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "3";
+  }
+  cuatro.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "4";
+  }
+  cinco.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "5";
+  }
+  seis.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "6";
+  }
+  siete.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "7";
+  }
+  ocho.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "8";
+  }
+  nueve.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "9";
+  }
+  cero.onclick = function(e){
+      resultado.textContent = resultado.textContent  + "0";
+  }
+  reset.onclick = function(e){
+      resetear();
+  }
+  suma.onclick = function(e){
+      operandoa = resultado.textContent;
+      operacion = "+";
+      limpiar();
+  }
+  resta.onclick = function(e){
+      operandoa = resultado.textContent;
+      operacion = "-";
+      limpiar();
+  }
+  multiplicacion.onclick = function(e){
+      operandoa = resultado.textContent;
+      operacion = "*";
+      limpiar();
+  }
+  division.onclick = function(e){
+      operandoa = resultado.textContent;
+      operacion = "/";
+      limpiar();
+  }
+  igual.onclick = function(e){
+      operandob = resultado.textContent;
+      resolver();
+  }
 
-/*pantalla de visualización: bordes, posición, color de fondo, estilo letra.*/
-#textoPantalla { width: 185px; border: 2px black solid; text-align: right; 
-                 position: relative; left: 23px;  padding: 0px 5px;
-                 background-color: white; font-family: "courier new"; 
-                 overflow: hidden;}
+function limpiar(){
+  resultado.textContent = "";
+}
+function resetear(){
+  resultado.textContent = "";
+  operandoa = 0;
+  operandob = 0;
+  operacion = "";
+}
 
-/*botones normales: anchura y margen*/
-.calculadora [type=button] { width: 35px; padding: 0;  }
-/*botones especiales*/
-.calculadora input.largo { color: red; width: 60px; }
-<!--java-->
-<div class="calculadora"
-<form action="#" name="calculadora" id="calculadora">
-<p id="textoPantalla">0</p>
-<p>
-<input type="button" class="largo" value="Retr" onclick="retro()"   />
-<input type="button" class="largo" value="CE" onclick="borradoParcial()"  />
-<input type="button" class="largo" value="C" onclick="borradoTotal()"  />
-</p>
-<p>
-<input type="button" value="7" onclick="numero(7)" />
-<input type="button" value="8" onclick="numero('8')" />
-<input type="button" value="9" onclick="numero('9')" />
-<input type="button" value="/" onclick="operar('/')"  />
-<input type="button" value="Raiz" onclick="raizc()" />
-</p>
-<p>
-<input type="button" value="4" onclick="numero('4')" />
-<input type="button" value="5" onclick="numero('5')" />
-<input type="button" value="6" onclick="numero('6')" />
-<input type="button" value="*" onclick="operar('*')" />
-<input type="button" value="%" onclick="porcent()" />
-</p>
-<p>
-<input type="button" value="1" onclick="numero('1')" />
-<input type="button" value="2" onclick="numero('2')" />
-<input type="button" value="3" onclick="numero('3')" />
-<input type="button" value="-" onclick="operar('-')" />
-<input type="button" value="1/x" onclick="inve()" />
-</p>
-<p>
-<input type="button" value="0" onclick="numero('0')" />
-<input type="button" value="+/-" onclick="opuest()" />
-<input type="button" value="." onclick="numero('.')" />
-<input type="button" value="+" onclick="operar('+')" />
-<input type="button" value="=" onclick="igualar()" />
-</p>
-</form>
-</div>
+
+function resolver(){
+  var res = 0;
+  switch(operacion){
+    case "+":
+      res = parseFloat(operandoa) + parseFloat(operandob);
+      break;
+    case "-":
+        res = parseFloat(operandoa) - parseFloat(operandob);
+        break;
+    case "*":
+      res = parseFloat(operandoa) * parseFloat(operandob);
+      break;
+    case "/":
+      res = parseFloat(operandoa) / parseFloat(operandob);
+      break;
+  }
+  resetear();
+  resultado.textContent = res;
+}

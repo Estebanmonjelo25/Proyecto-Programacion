@@ -67,10 +67,13 @@
 </style>
 <!--codigo css-->
 
-
+//Declaramos variables
+var operandoa;
+var operandob;
+var operacion;
 
 function init(){
- 
+  //variables
   var resultado = document.getElementById('resultado');
   var reset = document.getElementById('reset');
   var suma = document.getElementById('suma');
@@ -89,7 +92,6 @@ function init(){
   var nueve = document.getElementById('nueve');
   var cero = document.getElementById('cero');
 }
-
 
 //Eventos de click
   uno.onclick = function(e){
@@ -160,7 +162,6 @@ function resetear(){
   operacion = "";
 }
 
-
 function resolver(){
   var res = 0;
   switch(operacion){
@@ -180,3 +181,4 @@ function resolver(){
   resetear();
   resultado.textContent = res;
 }
+
